@@ -1,0 +1,173 @@
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Georgia',serif;
+}
+
+body{
+  background:#f5f7fa url('assets/upscalemedia-transformed2.jpeg') center/cover no-repeat fixed;
+  color:#8b90b2;
+  overflow-x:hidden;
+}
+
+.cover{
+  position:fixed;
+  inset:0;
+  background:rgba(250,251,252,.95);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+
+.gate{
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:#fff;
+  text-align:center;
+  padding:30px;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.event{
+  letter-spacing:2px;
+  font-size:14px;
+}
+
+.names{
+  font-size:42px;
+  margin:15px 0;
+}
+
+.date{
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+.open{
+  display:block;
+  margin-top:20px;
+  font-size:13px;
+  letter-spacing:3px;
+}
+
+.hidden{display:none;}
+
+.section{
+  padding:80px 25px;
+  text-align:center;
+}
+
+.glass{
+  background:rgba(220,230,239,.6);
+  backdrop-filter:blur(12px);
+  margin:20px;
+  border-radius:20px;
+}
+
+h2{
+  font-size:18px;
+  margin-bottom:20px;
+}
+
+.text,.doa{
+  font-size:14px;
+  line-height:1.8;
+}
+
+.hashtag{
+  margin-top:20px;
+  font-size:18px;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#dce6ef;
+  display:flex;
+  justify-content:space-around;
+  padding:14px 0;
+  z-index:5;
+}
+
+.bottom-nav a{
+  font-size:22px;
+  text-decoration:none;
+}
+.countdown-wrapper {
+  margin-top: 40px; /* space from text above */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px; /* space between title and boxes */
+  color: #003049; /* dark blue text to match boxes */
+  letter-spacing: 1px;
+}
+
+/* Countdown Styles */
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+  flex-wrap: nowrap;
+}
+
+/* Each countdown box */
+.time-box {
+  background: rgba(255, 255, 255, 0.85);
+  color: #003049;
+  border-radius: 14px;
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Number style */
+.time-box span {
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Label style */
+.time-box small {
+  font-size: 11px;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 480px) {
+  .time-box {
+    width: 64px;
+    height: 64px;
+  }
+
+  .time-box span {
+    font-size: 22px;
+  }
+}
