@@ -1,154 +1,114 @@
-/* style.css - tuned to match Image 3 (use assets/bg-invite.png exactly) */
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Walimatul Urus Azwan & Nabilah</title>
+  <meta name="description" content="Tekan pautan untuk lihat jemputan" />
 
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap');
+  <!-- Fonts to closely match the sample -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  /* use your uploaded PNG exactly */
-  background: #f6f4f1 url('assets/bg-invite.png') center top/contain no-repeat fixed;
-  color:#182430;
-  font-family:"Playfair Display", Georgia, serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
-  padding:22px;
-}
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-/* cover (on top before opening) */
-.cover{
-  position:fixed;
-  inset:0;
-  background: rgba(250,250,250,0.98);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:300;
-}
-.gate{
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background: #fff;
-  text-align:center;
-  padding:26px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.12);
-  cursor:pointer;
-}
-.gate .gate-names{font-family:"Great Vibes", cursive; font-size:42px; color:#222; margin:8px 0}
-.gate .event{letter-spacing:2px; font-size:13px}
-.gate .open{display:inline-block;margin-top:16px;font-weight:700;letter-spacing:3px}
+<audio id="bgMusic" loop>
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
 
-/* butterflies in front of content */
-#butterflies{position:fixed;inset:0;pointer-events:none;z-index:250}
-.spark-butterfly{position:fixed;width:40px;height:40px;transform-origin:center;will-change:transform,opacity;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.12));}
-.butterfly-sparkle{position:fixed;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff,#e6e6e6);box-shadow:0 0 8px rgba(255,255,255,0.9);transform:translate(-50%,-50%) scale(.2);animation:sparkle-pop .9s forwards ease-out}
-@keyframes sparkle-pop{0%{opacity:1;transform:translate(-50%,-50%) scale(.25)}60%{opacity:.9;transform:translate(-50%,-60%) scale(1.05)}100%{opacity:0;transform:translate(-50%,-90%) scale(1.5)}}
+<!-- COVER -->
+<div id="cover" class="cover" role="button" aria-label="Open invitation" onclick="openInvite()">
+  <div class="gate" >
+    <p class="event">Walimatul Urus</p>
+    <h1 class="gate-names">Azwan<br>&<br>Nabilah</h1>
+    <p class="date">Sabtu • 02 Mei 2026</p>
+    <span class="open">BUKA</span>
+  </div>
+</div>
 
-/* content sits behind butterflies */
-#content{position:relative;z-index:200}
+<!-- Butterflies overlay (fixed, in front of content) -->
+<div id="butterflies" aria-hidden="true"></div>
 
-/* invitation wrapper positioned to align with PNG's inner paper */
-.invitation-wrapper{
-  width: 820px;            /* tuned to match PNG artwork proportion at typical desktop sizes */
-  max-width:92%;
-  margin:48px auto;       /* center on page */
-  padding:36px 42px 20px 42px;
-  background: rgba(255,255,255,0.00);
-}
+<!-- Main content positioned to fit exactly inside the PNG artwork -->
+<main id="content" class="hidden" aria-live="polite">
+  <div class="invitation-wrapper">
+    <div class="invitation-inner">
+      <div class="top-row">
+        <div class="names-block">
+          <h1 class="names">
+            <span class="first">Azwan</span>
+            <span class="amp">&</span>
+            <span class="last">Nabilah</span>
+          </h1>
+        </div>
 
-/* inner area for exact text placement */
-.invitation-inner{
-  width:680px; /* exact inner width tuned to align with PNG */
-  margin: 0 auto;
-}
+        <aside class="date-box" aria-hidden="true">
+          <div class="date-day">02</div>
+          <div class="date-month">MAY<br><span class="year">2026</span></div>
+          <div class="date-time">11:30<br><span class="dow">SATURDAY</span></div>
+        </aside>
+      </div>
 
-/* top row: names + right date block */
-.top-row{display:flex;align-items:flex-start;gap:22px;flex-wrap:nowrap}
-.names-block{flex:1 1 65%}
-.names{
-  font-family:"Great Vibes", cursive;
-  font-size:110px; /* large script like sample */
-  line-height:0.88;
-  color:#0b0b0b;
-  margin:10px 0 6px;
-  letter-spacing:0;
-}
-.names .amp{display:block;font-size:36px;line-height:0.6;margin:6px 0}
+      <h2 class="walimatul">WALIMATUL URUS</h2>
 
-/* date box on right (vertical stacked numbers) */
-.date-box{
-  width:120px;
-  text-align:center;
-  color:#0d2b3f;
-  font-family:"Playfair Display", serif;
-  margin-top:6px;
-}
-.date-day{font-size:64px;font-weight:700;line-height:1}
-.date-month{font-size:14px;margin-top:6px}
-.date-month .year{display:block;margin-top:8px;font-size:13px}
-.date-time{margin-top:10px;font-size:13px;color:#24303a}
+      <p class="lead">
+        Dengan penuh kesyukuran, kami mempersilakan Dato’ | Datin | Tuan | Encik | Cik seisi keluarga hadir ke majlis perkahwinan anakanda kami.
+      </p>
 
-/* WALIMATUL URUS heading */
-.walimatul{
-  font-size:32px;
-  text-align:center;
-  letter-spacing:2px;
-  margin:18px 0 8px;
-  color:#10283a;
-  font-weight:700;
-}
+      <div class="content-columns">
+        <div class="left-col">
+          <h3 class="loc-title">Lokasi</h3>
+          <p class="loc-address">
+            No 5, Jalan Kenari,<br>
+            Kampung Bukit Kuching,<br>
+            45800 Jeram, Selangor
+          </p>
 
-/* lead text paragraph centered */
-.lead{
-  text-align:center;
-  color:#22333b;
-  max-width:680px;
-  margin:6px auto 18px;
-  font-size:15px;
-  line-height:1.6;
-}
+          <p class="hashtag">#Azwan|Nabilah</p>
+        </div>
 
-/* two-column area under lead */
-.content-columns{display:flex;gap:32px;align-items:flex-start;justify-content:space-between;flex-wrap:nowrap;margin-top:8px}
-.left-col{flex:0 0 38%}
-.right-col{flex:0 0 58%}
+        <div class="right-col">
+          <div class="countdown-title">COUNTDOWN</div>
+          <div class="countdown">
+            <div class="count-box">
+              <div class="count-number" id="days">00</div>
+              <div class="count-label">Hari</div>
+            </div>
+            <div class="count-box">
+              <div class="count-number" id="hours">00</div>
+              <div class="count-label">Jam</div>
+            </div>
+            <div class="count-box">
+              <div class="count-number" id="minutes">00</div>
+              <div class="count-label">Minit</div>
+            </div>
+            <div class="count-box">
+              <div class="count-number" id="seconds">00</div>
+              <div class="count-label">Saat</div>
+            </div>
+          </div>
 
-/* location block */
-.loc-title{font-size:18px;margin-bottom:8px;color:#0e2b3b}
-.loc-address{font-size:15px;line-height:1.6;color:#1f2f36}
+          <div class="doa">
+            <p>
+              Ya Allah Ya Rahman Ya Rahim, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. Kurniakanlah mereka zuriat yang soleh dan solehah. Kekalkanlah jodoh mereka hingga ke jannah.
+            </p>
+          </div>
+        </div>
+      </div>
 
-/* hashtag */
-.hashtag{margin-top:22px;color:#0f2b3a}
+    </div>
+  </div>
+</main>
 
-/* right column - countdown and doa */
-.countdown-title{font-size:20px;font-weight:700;color:#0e2b3b;margin-bottom:10px}
-.countdown{display:flex;gap:12px;align-items:center;margin-bottom:14px;justify-content:flex-start}
-.count-box{background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 6px 18px rgba(15,25,30,0.06);text-align:center;min-width:64px}
-.count-number{font-size:22px;font-weight:700;color:#10242f}
-.count-label{font-size:12px;color:#5c6b71;margin-top:6px}
+<!-- bottom nav -->
+<nav class="bottom-nav" aria-hidden="true">
+  <a href="tel:+60123456789">📞</a>
+  <a href="https://wa.me/60123456789">💬</a>
+  <a href="https://maps.google.com/?q=3.079934,101.5669504">📍</a>
+  <a href="#" onclick="alert('Maklumat hadiah boleh dimasukkan di sini')">🎁</a>
+</nav>
 
-/* doa paragraph */
-.doa p{font-size:15px;line-height:1.6;color:#243033}
-
-/* bottom nav hidden behind content */
-.bottom-nav{position:fixed;bottom:0;width:100%;background:transparent;display:flex;justify-content:space-around;padding:14px 0;z-index:300}
-.bottom-nav a{font-size:22px;text-decoration:none}
-
-/* responsive adjustments (try to keep the match across widths) */
-@media (max-width:1000px){
-  .invitation-wrapper{width:92%}
-  .invitation-inner{width:92%}
-  .names{font-size:68px}
-  .top-row{flex-wrap:wrap}
-  .date-box{order:2;margin-top:12px}
-  .content-columns{flex-direction:column}
-  .left-col{flex-basis:100%}
-  .right-col{flex-basis:100%}
-}
-@media (max-width:600px){
-  .names{font-size:48px}
-  .date-day{font-size:44px}
-  .walimatul{font-size:24px}
-  .lead,.loc-address,.doa p{font-size:14px}
-}
+<script src="script.js"></script>
+</body>
+</html>
