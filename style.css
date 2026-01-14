@@ -1,154 +1,171 @@
-/* style.css - tuned to match Image 3 (use assets/bg-invite.png exactly) */
+// script.js - silver sparkling butterflies in front of the content + countdown (no auto-scroll)
 
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&display=swap');
+let _butterflyState = {
+  items: [],
+  rafId: null,
+  lastT: 0
+};
 
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  /* use your uploaded PNG exactly */
-  background: #f6f4f1 url('assets/bg-invite.png') center top/contain no-repeat fixed;
-  color:#182430;
-  font-family:"Playfair Display", Georgia, serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
-  padding:22px;
+/* OPEN INVITE */
+function openInvite() {
+  document.getElementById('cover').style.display = 'none';
+  document.getElementById('content').classList.remove('hidden');
+
+  // play background music (iOS restriction safe after user click)
+  const music = document.getElementById('bgMusic');
+  if (music) music.play().catch(() => {});
+
+  // spawn a few shiny silver butterflies (4 recommended)
+  spawnSparklingButterflies(4);
 }
 
-/* cover (on top before opening) */
-.cover{
-  position:fixed;
-  inset:0;
-  background: rgba(250,250,250,0.98);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:300;
-}
-.gate{
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background: #fff;
-  text-align:center;
-  padding:26px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.12);
-  cursor:pointer;
-}
-.gate .gate-names{font-family:"Great Vibes", cursive; font-size:42px; color:#222; margin:8px 0}
-.gate .event{letter-spacing:2px; font-size:13px}
-.gate .open{display:inline-block;margin-top:16px;font-weight:700;letter-spacing:3px}
+/* SPARKLING BUTTERFLIES (shiny silver)
+   - each is an SVG with metallic gradient
+   - they orbit and weave in front of the content and leave sparkles
+*/
+function spawnSparklingButterflies(count = 4) {
+  const container = document.getElementById('butterflies');
+  if (!container) return;
+  container.innerHTML = '';
 
-/* butterflies in front of content */
-#butterflies{position:fixed;inset:0;pointer-events:none;z-index:250}
-.spark-butterfly{position:fixed;width:40px;height:40px;transform-origin:center;will-change:transform,opacity;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,0.12));}
-.butterfly-sparkle{position:fixed;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff,#e6e6e6);box-shadow:0 0 8px rgba(255,255,255,0.9);transform:translate(-50%,-50%) scale(.2);animation:sparkle-pop .9s forwards ease-out}
-@keyframes sparkle-pop{0%{opacity:1;transform:translate(-50%,-50%) scale(.25)}60%{opacity:.9;transform:translate(-50%,-60%) scale(1.05)}100%{opacity:0;transform:translate(-50%,-90%) scale(1.5)}}
+  const card = document.querySelector('.invitation-inner') || document.querySelector('.invitation-wrapper') || document.body;
+  const rect = card.getBoundingClientRect();
+  const center = {
+    x: rect.left + rect.width / 2 + window.scrollX,
+    y: rect.top + rect.height / 2 + window.scrollY
+  };
+  const baseRadius = Math.max(rect.width, rect.height) * 0.42;
 
-/* content sits behind butterflies */
-#content{position:relative;z-index:200}
+  if (_butterflyState.rafId) {
+    cancelAnimationFrame(_butterflyState.rafId);
+    _butterflyState.rafId = null;
+  }
+  _butterflyState.items = [];
+  _butterflyState.lastT = performance.now();
 
-/* invitation wrapper positioned to align with PNG's inner paper */
-.invitation-wrapper{
-  width: 820px;            /* tuned to match PNG artwork proportion at typical desktop sizes */
-  max-width:92%;
-  margin:48px auto;       /* center on page */
-  padding:36px 42px 20px 42px;
-  background: rgba(255,255,255,0.00);
-}
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'spark-butterfly';
+    const gid = 'g' + Date.now().toString(36) + '_' + i;
+    el.innerHTML = `
+      <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="${gid}" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+            <stop offset="45%" stop-color="#e6e6e6" stop-opacity="1" />
+            <stop offset="100%" stop-color="#bfbfbf" stop-opacity="1" />
+          </linearGradient>
+        </defs>
+        <g transform="translate(32,32)">
+          <path d="M-4 -2 C -18 -28 -44 -8 -20 6 C -8 14 -2 8 -4 -2 Z" fill="url(#${gid})" opacity="0.99"></path>
+          <path d="M4 -2 C 18 -28 44 -8 20 6 C 8 14 2 8 4 -2 Z" fill="url(#${gid})" opacity="0.99"></path>
+          <circle r="2.2" fill="#6b4f36" opacity="0.95"></circle>
+        </g>
+      </svg>
+    `;
+    container.appendChild(el);
 
-/* inner area for exact text placement */
-.invitation-inner{
-  width:680px; /* exact inner width tuned to align with PNG */
-  margin: 0 auto;
-}
+    const startAngle = Math.random() * Math.PI * 2;
+    const radius = baseRadius * (0.4 + Math.random() * 0.5);
+    const speed = (0.16 + Math.random() * 0.34) * (Math.random() < 0.5 ? -1 : 1);
+    const wobble = 8 + Math.random() * 20;
+    const size = 26 + Math.random() * 24;
+    el.style.width = `${Math.round(size)}px`;
+    el.style.height = `${Math.round(size)}px`;
+    el.style.opacity = (0.88 + Math.random() * 0.12).toFixed(2);
 
-/* top row: names + right date block */
-.top-row{display:flex;align-items:flex-start;gap:22px;flex-wrap:nowrap}
-.names-block{flex:1 1 65%}
-.names{
-  font-family:"Great Vibes", cursive;
-  font-size:110px; /* large script like sample */
-  line-height:0.88;
-  color:#0b0b0b;
-  margin:10px 0 6px;
-  letter-spacing:0;
-}
-.names .amp{display:block;font-size:36px;line-height:0.6;margin:6px 0}
+    _butterflyState.items.push({
+      el,
+      angle: startAngle,
+      radius,
+      speed,
+      wobble,
+      centerX: center.x,
+      centerY: center.y,
+      sparkleTimer: 0.15 + Math.random() * 0.6
+    });
+  }
 
-/* date box on right (vertical stacked numbers) */
-.date-box{
-  width:120px;
-  text-align:center;
-  color:#0d2b3f;
-  font-family:"Playfair Display", serif;
-  margin-top:6px;
-}
-.date-day{font-size:64px;font-weight:700;line-height:1}
-.date-month{font-size:14px;margin-top:6px}
-.date-month .year{display:block;margin-top:8px;font-size:13px}
-.date-time{margin-top:10px;font-size:13px;color:#24303a}
-
-/* WALIMATUL URUS heading */
-.walimatul{
-  font-size:32px;
-  text-align:center;
-  letter-spacing:2px;
-  margin:18px 0 8px;
-  color:#10283a;
-  font-weight:700;
+  _butterflyState.rafId = requestAnimationFrame(_butterflyLoop);
 }
 
-/* lead text paragraph centered */
-.lead{
-  text-align:center;
-  color:#22333b;
-  max-width:680px;
-  margin:6px auto 18px;
-  font-size:15px;
-  line-height:1.6;
+function _butterflyLoop(ts) {
+  const state = _butterflyState;
+  const dt = (ts - state.lastT) / 1000 || 0;
+  state.lastT = ts;
+
+  const card = document.querySelector('.invitation-inner') || document.querySelector('.invitation-wrapper') || document.body;
+  const rect = card.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2 + window.scrollX;
+  const centerY = rect.top + rect.height / 2 + window.scrollY;
+
+  for (const item of state.items) {
+    item.centerX = centerX;
+    item.centerY = centerY;
+
+    item.angle += item.speed * dt;
+
+    const x = item.centerX + Math.cos(item.angle) * item.radius + Math.sin(item.angle * 2.0) * (item.wobble * 0.5);
+    const y = item.centerY + Math.sin(item.angle) * item.radius * 0.7 + Math.cos(item.angle * 1.5) * (item.wobble * 0.42);
+
+    const el = item.el;
+    const w = el.offsetWidth || 36, h = el.offsetHeight || 36;
+    const flap = 0.92 + Math.abs(Math.sin(item.angle * 3)) * 0.16;
+    el.style.transform = `translate(${x - w/2}px, ${y - h/2}px) rotate(${Math.sin(item.angle) * 34}deg) scale(${flap})`;
+
+    // sparkles
+    item.sparkleTimer -= dt;
+    if (item.sparkleTimer <= 0) {
+      _emitSparkle(x, y);
+      item.sparkleTimer = 0.12 + Math.random() * 0.6;
+    }
+  }
+
+  state.rafId = requestAnimationFrame(_butterflyLoop);
 }
 
-/* two-column area under lead */
-.content-columns{display:flex;gap:32px;align-items:flex-start;justify-content:space-between;flex-wrap:nowrap;margin-top:8px}
-.left-col{flex:0 0 38%}
-.right-col{flex:0 0 58%}
-
-/* location block */
-.loc-title{font-size:18px;margin-bottom:8px;color:#0e2b3b}
-.loc-address{font-size:15px;line-height:1.6;color:#1f2f36}
-
-/* hashtag */
-.hashtag{margin-top:22px;color:#0f2b3a}
-
-/* right column - countdown and doa */
-.countdown-title{font-size:20px;font-weight:700;color:#0e2b3b;margin-bottom:10px}
-.countdown{display:flex;gap:12px;align-items:center;margin-bottom:14px;justify-content:flex-start}
-.count-box{background:#fff;border-radius:12px;padding:10px 14px;box-shadow:0 6px 18px rgba(15,25,30,0.06);text-align:center;min-width:64px}
-.count-number{font-size:22px;font-weight:700;color:#10242f}
-.count-label{font-size:12px;color:#5c6b71;margin-top:6px}
-
-/* doa paragraph */
-.doa p{font-size:15px;line-height:1.6;color:#243033}
-
-/* bottom nav hidden behind content */
-.bottom-nav{position:fixed;bottom:0;width:100%;background:transparent;display:flex;justify-content:space-around;padding:14px 0;z-index:300}
-.bottom-nav a{font-size:22px;text-decoration:none}
-
-/* responsive adjustments (try to keep the match across widths) */
-@media (max-width:1000px){
-  .invitation-wrapper{width:92%}
-  .invitation-inner{width:92%}
-  .names{font-size:68px}
-  .top-row{flex-wrap:wrap}
-  .date-box{order:2;margin-top:12px}
-  .content-columns{flex-direction:column}
-  .left-col{flex-basis:100%}
-  .right-col{flex-basis:100%}
+function _emitSparkle(x, y) {
+  const s = document.createElement('span');
+  s.className = 'butterfly-sparkle';
+  s.style.left = `${Math.round(x)}px`;
+  s.style.top = `${Math.round(y)}px`;
+  const offsetX = Math.round((Math.random() - 0.5) * 18);
+  const offsetY = Math.round((Math.random() - 0.5) * 14);
+  s.style.transform = `translate(${offsetX}px, ${offsetY}px) translate(-50%,-50%) scale(0.2)`;
+  document.getElementById('butterflies').appendChild(s);
+  s.addEventListener('animationend', () => s.remove(), { once: true });
 }
-@media (max-width:600px){
-  .names{font-size:48px}
-  .date-day{font-size:44px}
-  .walimatul{font-size:24px}
-  .lead,.loc-address,.doa p{font-size:14px}
+
+function clearButterflies() {
+  if (_butterflyState.rafId) {
+    cancelAnimationFrame(_butterflyState.rafId);
+    _butterflyState.rafId = null;
+  }
+  _butterflyState.items.forEach(it => it.el.remove());
+  _butterflyState.items = [];
+  const container = document.getElementById('butterflies');
+  if (container) container.querySelectorAll('.butterfly-sparkle').forEach(e => e.remove());
 }
+
+/* COUNTDOWN TIMER */
+const weddingDate = new Date("May 2, 2026 11:30:00").getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const diff = weddingDate - now;
+
+  if (diff <= 0) return;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").innerText = String(days).padStart(2,'0');
+  document.getElementById("hours").innerText = String(hours).padStart(2,'0');
+  document.getElementById("minutes").innerText = String(minutes).padStart(2,'0');
+  document.getElementById("seconds").innerText = String(seconds).padStart(2,'0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
