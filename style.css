@@ -73,7 +73,7 @@ body{
 
 /* ✅ Section spacing (reduced for elegant look) */
 .section{
-  padding:80px 20px;
+  padding:50px 20px 40px;
   text-align:center;
 }
 
@@ -179,7 +179,7 @@ h2{
 @media (max-width:480px){
 
   .section{
-    padding:40px 15px;
+    padding:50px 15px;
   }
 
   .glass{
