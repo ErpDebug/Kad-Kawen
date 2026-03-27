@@ -1,4 +1,3 @@
-
 *{
   margin:0;
   padding:0;
@@ -6,12 +5,19 @@
   font-family:'Georgia',serif;
 }
 
+/* ✅ Background FIXED (better scaling on all devices) */
 body{
-  background:#f5f7fa url('assets/upscalemedia-transformed2.jpeg') center/cover no-repeat fixed;
+  background-color:#f5f7fa;
+  background-image:url('assets/upscalemedia-transformed2.jpeg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:scroll; /* mobile friendly */
   color:#8b90b2;
   overflow-x:hidden;
 }
 
+/* Cover screen */
 .cover{
   position:fixed;
   inset:0;
@@ -22,6 +28,7 @@ body{
   z-index:10;
 }
 
+/* Floating circle */
 .gate{
   width:300px;
   height:300px;
@@ -60,35 +67,45 @@ body{
   letter-spacing:3px;
 }
 
-.hidden{display:none;}
+.hidden{
+  display:none;
+}
 
+/* ✅ Section spacing (reduced for elegant look) */
 .section{
-  padding:80px 25px;
+  padding:50px 20px;
   text-align:center;
 }
 
+/* ✅ Glass effect (clean + modern) */
 .glass{
-  background:rgba(220,230,239,.6);
-  backdrop-filter:blur(12px);
-  margin:20px;
-  border-radius:20px;
+  background:rgba(220,230,239,.55);
+  backdrop-filter:blur(10px);
+  margin:12px 16px;
+  border-radius:18px;
+  padding:25px 20px;
 }
 
+/* Titles */
 h2{
   font-size:18px;
-  margin-bottom:20px;
+  margin-bottom:12px;
+  letter-spacing:1px;
 }
 
+/* Text */
 .text,.doa{
   font-size:14px;
-  line-height:1.8;
+  line-height:1.6;
 }
 
+/* Hashtag */
 .hashtag{
   margin-top:20px;
   font-size:18px;
 }
 
+/* Bottom navigation */
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -104,70 +121,82 @@ h2{
   font-size:22px;
   text-decoration:none;
 }
+
+/* Countdown wrapper */
 .countdown-wrapper {
-  margin-top: 40px; /* space from text above */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 .countdown-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px; /* space between title and boxes */
-  color: #003049; /* dark blue text to match boxes */
-  letter-spacing: 1px;
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:15px;
+  color:#003049;
+  letter-spacing:1px;
 }
 
-/* Countdown Styles */
+/* Countdown layout */
 .countdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-top: 30px;
-  flex-wrap: nowrap;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-top:20px;
+  flex-wrap:nowrap;
 }
 
-/* Each countdown box */
+/* Countdown box */
 .time-box {
-  background: rgba(255, 255, 255, 0.85);
-  color: #003049;
-  border-radius: 14px;
-  width: 72px;
-  height: 72px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  background:rgba(255,255,255,0.9);
+  color:#003049;
+  border-radius:12px;
+  width:70px;
+  height:70px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
 }
 
-/* Number style */
 .time-box span {
-  font-size: 26px;
-  font-weight: bold;
-  line-height: 1;
+  font-size:24px;
+  font-weight:bold;
+  line-height:1;
 }
 
-/* Label style */
 .time-box small {
-  font-size: 11px;
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size:10px;
+  margin-top:4px;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
-/* Responsive adjustment for small screens */
-@media (max-width: 480px) {
-  .time-box {
-    width: 64px;
-    height: 64px;
+/* ✅ Mobile optimization */
+@media (max-width:480px){
+
+  .section{
+    padding:40px 15px;
   }
 
-  .time-box span {
-    font-size: 22px;
+  .glass{
+    margin:10px;
+    padding:20px 15px;
+  }
+
+  h2{
+    font-size:16px;
+  }
+
+  .time-box{
+    width:60px;
+    height:60px;
+  }
+
+  .time-box span{
+    font-size:20px;
   }
 }
