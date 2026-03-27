@@ -80,7 +80,7 @@ body{
 /* ✅ Glass effect (clean + modern) */
 .glass{
   background:rgba(220,230,239,.55);
-  backdrop-filter:blur(70px);
+  backdrop-filter:blur(3px);
   margin:12px 16px;
   border-radius:18px;
   padding:25px 20px;
