@@ -14,7 +14,7 @@ body{
   background-repeat:no-repeat;
   background-attachment:scroll; /* mobile friendly */
   color:#8b90b2;
-
+  overflow-x:hidden;
 }
 
 /* Cover screen */
@@ -73,14 +73,14 @@ body{
 
 /* ✅ Section spacing (reduced for elegant look) */
 .section{
-  padding:100px 20px 40px;
+  padding:80px 20px 40px;
   text-align:center;
 }
 
 /* ✅ Glass effect (clean + modern) */
 .glass{
   background:rgba(220,230,239,.55);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(30px);
   margin:12px 16px;
   border-radius:18px;
   padding:25px 20px;
@@ -89,7 +89,7 @@ body{
 /* Titles */
 h2{
   font-size:18px;
-  margin-bottom:12px;
+  margin-bottom:9px;
   letter-spacing:1px;
 }
 
