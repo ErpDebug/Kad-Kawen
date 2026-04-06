@@ -10,74 +10,107 @@
 
 <body>
 
-<!-- MUSIC -->
+<!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop>
   <source src="assets/music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- HERO SECTION -->
-<section class="hero">
-
-  <img src="assets/upscalemedia-transformed2.jpeg" class="hero-img">
-
+<!-- COVER -->
+<div id="cover" class="cover">
   <div class="gate" onclick="openInvite()">
     <p class="event">Walimatul Urus</p>
     <h1 class="names">Azwan<br>&<br>Nabilah</h1>
     <p class="date">Sabtu • 02 Mei 2026</p>
     <span class="open">BUKA</span>
   </div>
-
-</section>
+</div>
 
 <!-- CONTENT -->
 <main id="content" class="hidden">
 
-  <section class="section">
-    <p class="text">
+  <!-- SECTION 1 : IMAGE + TEXT + COUNTDOWN -->
+<!-- SECTION 1 -->
+<section class="section bg-image">
+<br><br><div class="overlay">
+    <br><br><br><br><p class="text"><br><br><br><br>
       Dengan penuh kesyukuran, kami mempersilakan<br>
       Dato’ | Datin | Tuan | Puan | Encik | Cik<br>
       seisi keluarga hadir ke majlis perkahwinan anakanda kami
     </p>
+  </div>
+</section>
+
+  <!-- SECTION 2 : LIGHT BLUE -->
+  <section class="section blue">
+    <div class="overlay">
+      <h2>Atur Cara Majlis</h2>
+      <p>
+        Kehadiran Tetamu<br><strong>11:30 pagi</strong><br><br>
+        Ketibaan Pengantin<br><strong>12:30 tengah hari</strong><br><br>
+        <!-- Makan Beradab<br><strong>1:30 petang</strong><br><br>-->
+        Majlis Berakhir<br><strong>09:00 Malam</strong>
+      </p>
+    </div>
   </section>
 
-  <section class="section">
-    <h2>Atur Cara Majlis</h2>
-    <p>
-      Kehadiran Tetamu<br><strong>11:30 pagi</strong><br><br>
-      Ketibaan Pengantin<br><strong>12:30 tengah hari</strong><br><br>
-      Majlis Berakhir<br><strong>09:00 Malam</strong>
-    </p>
-  </section>
+  <!-- SECTION 3 : IMAGE -->
+  <section class="section bg-image">
+    <div class="overlay">
+      <h2>Lokasi</h2>
+      <p>
+        <strong>Rumah Pengantin Perempuan</strong><br>
+        Lot 3220, Jalan Kenari,<br>
+        Kampung Bukit Kuching,<br>
+        45800 Jeram, Selangor<br>
+      </p>
+    </div>
+<!-- COUNTDOWN -->
+<div class="countdown-wrapper">
+  <p class="countdown-title"><strong>COUNTDOWN</strong></p>
+  <div class="countdown">
+    <div class="time-box">
+      <span id="days">00</span>
+      <small>Hari</small>
+    </div>
+    <div class="time-box">
+      <span id="hours">00</span>
+      <small>Jam</small>
+    </div>
+    <div class="time-box">
+      <span id="minutes">00</span>
+      <small>Minit</small>
+    </div>
+    <div class="time-box">
+      <span id="seconds">00</span>
+      <small>Saat</small>
+    </div>
+  </div>
+</div>
 
-  <section class="section">
-    <h2>Lokasi</h2>
-    <p>
-      <strong>Rumah Pengantin Perempuan</strong><br>
-      Lot 3220, Jalan Kenari,<br>
-      Kampung Bukit Kuching,<br>
-      45800 Jeram, Selangor
-    </p>
+  <!-- SECTION 4 : LIGHT BLUE -->
+  <section class="section blue">
+    <div class="glass">
+      <p class="doa">
+        Ya Allah Ya Rahman Ya Rahim,<br>
+        Berkatilah majlis perkahwinan ini.<br>
+        Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini.<br>
+        Kurniakanlah mereka zuriat yang soleh dan solehah.<br>
+        Kekalkanlah jodoh mereka hingga ke jannah.
+      </p>
+      <p class="hashtag">#Azwan|Nabilah</p>
+    </div>
   </section>
 
 </main>
 
-<!-- NAV -->
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <a href="tel:+60173133214">📞</a>
   <a href="https://wa.me/60123456789">💬</a>
-  <a href="#">📍</a>
-  <a href="#">🎁</a>
+  <a href="https://www.google.com/maps/place/3%C2%B016'14.9%22N+101%C2%B020'39.6%22E/@3.2708197,101.3432506,18z/data=!3m1!4b1!4m4!3m3!8m2!3d3.2708174!4d101.344336?entry=ttu&g_ep=EgoyMDI2MDMyMy4xIKXMDSoASAFQAw%3D%3D">📍</a>
+  <a href="#" onclick="alert('Jangan susah-susah datang lah dulu meraikan kami ye ')">🎁</a>
 </nav>
 
-<script>
-function openInvite(){
-  document.getElementById("content").classList.remove("hidden");
-  document.querySelector(".hero").style.display = "none";
-
-  const music = document.getElementById("bgMusic");
-  music.play();
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
