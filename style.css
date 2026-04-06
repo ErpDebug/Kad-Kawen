@@ -5,46 +5,47 @@
   font-family:'Georgia',serif;
 }
 
-/* ✅ Background FIXED (better scaling on all devices) */
+/* Background */
 body{
   background-color:#f5f7fa;
   background-image:url('assets/upscalemedia-transformed2.jpeg');
   background-position:center;
   background-size:cover;
   background-repeat:no-repeat;
-  background-attachment:scroll; /* mobile friendly */
+  background-attachment:scroll;
   color:#8b90b2;
   overflow-x:hidden;
 }
 
-/* Cover screen */
+/*  Cover (xde fixed position dh) */
 .cover{
-  position:fixed;
-  inset:0; /* replaces top, left, width, height */
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:rgba(250,251,252,.1);
+  margin-top:-120px; /* 👈 overlap control */
+  z-index:2;
 }
-/* Floating circle */
+
+/* ✅ Floating circle (responsive) */
 .gate{
-  width:300px;
-  height:300px;
+  width:80vw;
+  max-width:300px;
+  height:80vw;
+  max-height:300px;
   border-radius:50%;
   background:#fff;
   text-align:center;
   padding:30px;
   box-shadow:0 20px 40px rgba(0,0,0,.15);
   animation:float 3s ease-in-out infinite;
-
-  transform:translateY(120px); /* 👈 push it down */
 }
 
+/* ✅ Smooth floating (no conflict now) */
 @keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
 }
 
+/* Text styles */
 .event{
   letter-spacing:2px;
   font-size:14px;
@@ -71,13 +72,13 @@ body{
   display:none;
 }
 
-/* ✅ Section spacing (reduced for elegant look) */
+/* Sections */
 .section{
   padding:25px 20px;
   text-align:center;
 }
 
-/* ✅ Glass effect (clean + modern) */
+/* Glass effect */
 .glass{
   background:rgba(220,230,239,.10);
   backdrop-filter:blur(20px);
@@ -122,7 +123,7 @@ h2{
   text-decoration:none;
 }
 
-/* Countdown wrapper */
+/* Countdown */
 .countdown-wrapper {
   margin-top:30px;
   display:flex;
@@ -138,7 +139,6 @@ h2{
   letter-spacing:1px;
 }
 
-/* Countdown layout */
 .countdown {
   display:flex;
   justify-content:center;
@@ -148,7 +148,6 @@ h2{
   flex-wrap:nowrap;
 }
 
-/* Countdown box */
 .time-box {
   background:rgba(255,255,255,0.9);
   color:#003049;
@@ -175,8 +174,22 @@ h2{
   letter-spacing:1px;
 }
 
-/* ✅ Mobile optimization */
+/* Untuk Mobile optimization */
 @media (max-width:720px){
+
+  .cover{
+    margin-top:-80px; /* 👈 adjust overlap for phone */
+  }
+
+  .gate{
+    width:85vw;
+    height:85vw;
+    padding:20px;
+  }
+
+  .names{
+    font-size:32px;
+  }
 
   .section{
     padding:20px 10px;
