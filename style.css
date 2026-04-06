@@ -21,7 +21,7 @@ body{
 .cover{
   position:fixed;
   inset:0;
-  background:rgba(250,251,252,.95);
+  background:rgba(250,251,252,.100);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -96,7 +96,7 @@ h2{
 /* Text */
 .text,.doa{
   font-size:14px;
-  line-height:1.6;
+  line-height:2.0;
 }
 
 /* Hashtag */
