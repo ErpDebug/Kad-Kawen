@@ -77,7 +77,7 @@ body{
   
 /* ✅ Section spacing - REDUCED for normal appearance */  
 .section{  
-  padding:30px 20px; /* reduced from 60px */  
+  padding:15px 10px; /* reduced from 60px */  
   text-align:center;  
 }  
   
@@ -185,16 +185,16 @@ h2{
   
   /* ✅ First section - minimal extra padding (no huge 80px gap) */  
   .section:first-of-type{  
-    padding-top:40px; /* reduced from 80px */  
+    padding-top:20px; /* reduced from 80px */  
   }  
   
   .section{  
-    padding:25px 15px; /* reduced from 40px */  
+    padding:15px 10px; /* reduced from 40px */  
   }  
   
   .glass{  
     margin:12px;  
-    padding:25px 15px;  
+    padding:15px 10px;  
   }  
   
   h2{  
