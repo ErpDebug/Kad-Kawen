@@ -20,11 +20,11 @@ body{
 /* Cover screen */
 .cover{
   position:fixed;
-  inset:0;
+  inset:0; /* replaces top, left, width, height */
   display:flex;
-  align-items:flex-end;   /* 👈 push to bottom */
+  align-items:center;
   justify-content:center;
-  padding-bottom:80px;    /* 👈 control height from bottom */
+  background:rgba(250,251,252,.1);
 }
 /* Floating circle */
 .gate{
