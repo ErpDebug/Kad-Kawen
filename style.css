@@ -1,216 +1,221 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Georgia',serif;
-}
-
-/* ✅ Background FIXED (better scaling on all devices) */
-body{
-  background-color:#f5f7fa;
-  background-image:url('assets/upscalemedia-transformed2.jpeg');
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  background-attachment:scroll; /* mobile friendly */
-  color:#8b90b2;
-  overflow-x:hidden;
-
-  /* ✅ iPhone safe area fix */
-  padding-top:env(safe-area-inset-top);
-}
-
-/* Cover screen */
-.cover{
-  position:fixed;
-  inset:0;
-  background:rgba(250,251,252,.95);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-}
-
-/* Floating circle */
-.gate{
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:#fff;
-  text-align:center;
-  padding:30px;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
-  animation:float 3s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-}
-
-.event{
-  letter-spacing:2px;
-  font-size:14px;
-}
-
-.names{
-  font-size:42px;
-  margin:15px 0;
-}
-
-.date{
-  font-size:14px;
-  letter-spacing:2px;
-}
-
-.open{
-  display:block;
-  margin-top:20px;
-  font-size:13px;
-  letter-spacing:3px;
-}
-
-.hidden{
-  display:none;
-}
-
-/* ✅ Section spacing (fixed margin collapsing issue) */
-.section{
-  padding:60px 20px; /* slightly increased */
-  text-align:center;
-}
-
-/* ✅ Glass effect (clean + modern) */
-.glass{
-  background:rgba(220,230,239,.10);
-  backdrop-filter:blur(20px);
-  margin:16px;
-  border-radius:18px;
-  padding:30px 20px;
-}
-
-/* Titles */
-h2{
-  font-size:18px;
-  margin-bottom:10px;
-  letter-spacing:1px;
-}
-
-/* Text */
-.text,.doa{
-  font-size:14px;
-  line-height:1.7;
-  margin-top:10px; /* ✅ prevents text sticking to top */
-}
-
-/* Hashtag */
-.hashtag{
-  margin-top:20px;
-  font-size:18px;
-}
-
-/* Bottom navigation */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#dce6ef;
-  display:flex;
-  justify-content:space-around;
-  padding:14px 0;
-  z-index:5;
-}
-
-.bottom-nav a{
-  font-size:22px;
-  text-decoration:none;
-}
-
-/* Countdown wrapper */
-.countdown-wrapper {
-  margin-top:30px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.countdown-title {
-  font-size:16px;
-  font-weight:bold;
-  margin-bottom:15px;
-  color:#003049;
-  letter-spacing:1px;
-}
-
-/* Countdown layout */
-.countdown {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin-top:20px;
-  flex-wrap:nowrap;
-}
-
-/* Countdown box */
-.time-box {
-  background:rgba(255,255,255,0.9);
-  color:#003049;
-  border-radius:12px;
-  width:70px;
-  height:70px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 6px 18px rgba(0,0,0,0.12);
-}
-
-.time-box span {
-  font-size:24px;
-  font-weight:bold;
-  line-height:1;
-}
-
-.time-box small {
-  font-size:10px;
-  margin-top:4px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-/* ✅ Mobile optimization */
-@media (max-width:480px){
-
-  /* ✅ Push content DOWN (fix your issue) */
-  .section:first-of-type{
-    padding-top:80px;
-  }
-
-  .section{
-    padding:40px 15px;
-  }
-
-  .glass{
-    margin:12px;
-    padding:25px 15px;
-  }
-
-  h2{
-    font-size:16px;
-  }
-
-  .text,.doa{
-    font-size:13px;
-    margin-top:15px;
-  }
-
-  .time-box{
-    width:60px;
-    height:60px;
-  }
-
-  .time-box span{
-    font-size:20px;
-  }
+*{  
+  margin:0;  
+  padding:0;  
+  box-sizing:border-box;  
+  font-family:'Georgia',serif;  
+}  
+  
+/* ✅ Background FIXED (better scaling on all devices) */  
+body{  
+  background-color:#f5f7fa;  
+  background-image:url('assets/upscalemedia-transformed2.jpeg');  
+  background-position:center;  
+  background-size:cover;  
+  background-repeat:no-repeat;  
+  background-attachment:scroll; /* mobile friendly */  
+  color:#8b90b2;  
+  overflow-x:hidden;  
+  
+  /* ✅ iPhone safe area fix */  
+  padding-top:env(safe-area-inset-top);  
+  padding-bottom:70px; /* prevent content hidden by bottom nav */  
+}  
+  
+/* Cover screen */  
+.cover{  
+  position:fixed;  
+  inset:0;  
+  background:rgba(250,251,252,.95);  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  z-index:10;  
+}  
+  
+/* Floating circle */  
+.gate{  
+  width:300px;  
+  height:300px;  
+  border-radius:50%;  
+  background:#fff;  
+  text-align:center;  
+  padding:30px;  
+  box-shadow:0 20px 40px rgba(0,0,0,.15);  
+  animation:float 3s ease-in-out infinite;  
+}  
+  
+@keyframes float{  
+  0%,100%{transform:translateY(0)}  
+  50%{transform:translateY(-10px)}  
+}  
+  
+.event{  
+  letter-spacing:2px;  
+  font-size:14px;  
+}  
+  
+.names{  
+  font-size:42px;  
+  margin:15px 0;  
+}  
+  
+.date{  
+  font-size:14px;  
+  letter-spacing:2px;  
+}  
+  
+.open{  
+  display:block;  
+  margin-top:20px;  
+  font-size:13px;  
+  letter-spacing:3px;  
+}  
+  
+.hidden{  
+  display:none;  
+}  
+  
+/* ✅ Section spacing - REDUCED for normal appearance */  
+.section{  
+  padding:30px 20px; /* reduced from 60px */  
+  text-align:center;  
+}  
+  
+/* ✅ Glass effect (clean + modern) */  
+.glass{  
+  background:rgba(220,230,239,.10);  
+  backdrop-filter:blur(20px);  
+  margin:16px;  
+  border-radius:18px;  
+  padding:30px 20px;  
+}  
+  
+/* Titles */  
+h2{  
+  font-size:18px;  
+  margin-bottom:10px;  
+  letter-spacing:1px;  
+}  
+  
+/* Text */  
+.text,.doa{  
+  font-size:14px;  
+  line-height:1.7;  
+  margin-top:10px; /* ✅ prevents text sticking to top */  
+}  
+  
+/* Hashtag */  
+.hashtag{  
+  margin-top:20px;  
+  font-size:18px;  
+}  
+  
+/* Bottom navigation */  
+.bottom-nav{  
+  position:fixed;  
+  bottom:0;  
+  width:100%;  
+  background:#dce6ef;  
+  display:flex;  
+  justify-content:space-around;  
+  padding:14px 0;  
+  z-index:5;  
+}  
+  
+.bottom-nav a{  
+  font-size:22px;  
+  text-decoration:none;  
+}  
+  
+/* Countdown wrapper */  
+.countdown-wrapper {  
+  margin-top:30px;  
+  display:flex;  
+  flex-direction:column;  
+  align-items:center;  
+}  
+  
+.countdown-title {  
+  font-size:16px;  
+  font-weight:bold;  
+  margin-bottom:15px;  
+  color:#003049;  
+  letter-spacing:1px;  
+}  
+  
+/* Countdown layout */  
+.countdown {  
+  display:flex;  
+  justify-content:center;  
+  align-items:center;  
+  gap:10px;  
+  margin-top:20px;  
+  flex-wrap:nowrap;  
+}  
+  
+/* Countdown box */  
+.time-box {  
+  background:rgba(255,255,255,0.9);  
+  color:#003049;  
+  border-radius:12px;  
+  width:70px;  
+  height:70px;  
+  display:flex;  
+  flex-direction:column;  
+  justify-content:center;  
+  align-items:center;  
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);  
+}  
+  
+.time-box span {  
+  font-size:24px;  
+  font-weight:bold;  
+  line-height:1;  
+}  
+  
+.time-box small {  
+  font-size:10px;  
+  margin-top:4px;  
+  text-transform:uppercase;  
+  letter-spacing:1px;  
+}  
+  
+/* ✅ Mobile optimization */  
+@media (max-width:480px){  
+  
+  /* ✅ First section - minimal extra padding (no huge 80px gap) */  
+  .section:first-of-type{  
+    padding-top:40px; /* reduced from 80px */  
+  }  
+  
+  .section{  
+    padding:25px 15px; /* reduced from 40px */  
+  }  
+  
+  .glass{  
+    margin:12px;  
+    padding:25px 15px;  
+  }  
+  
+  h2{  
+    font-size:16px;  
+  }  
+  
+  .text,.doa{  
+    font-size:13px;  
+    margin-top:15px;  
+  }  
+  
+  .time-box{  
+    width:60px;  
+    height:60px;  
+  }  
+  
+  .time-box span{  
+    font-size:20px;  
+  }  
+  
+  body {  
+    padding-bottom: 65px; /* adjusted for mobile */  
+  }  
 }
