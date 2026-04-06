@@ -15,6 +15,9 @@ body{
   background-attachment:scroll; /* mobile friendly */
   color:#8b90b2;
   overflow-x:hidden;
+
+  /* ✅ iPhone safe area fix */
+  padding-top:env(safe-area-inset-top);
 }
 
 /* Cover screen */
@@ -71,9 +74,9 @@ body{
   display:none;
 }
 
-/* ✅ Section spacing (reduced for elegant look) */
+/* ✅ Section spacing (fixed margin collapsing issue) */
 .section{
-  padding:50px 20px;
+  padding:60px 20px; /* slightly increased */
   text-align:center;
 }
 
@@ -81,22 +84,23 @@ body{
 .glass{
   background:rgba(220,230,239,.10);
   backdrop-filter:blur(20px);
-  margin:12px 16px;
+  margin:16px;
   border-radius:18px;
-  padding:25px 20px;
+  padding:30px 20px;
 }
 
 /* Titles */
 h2{
   font-size:18px;
-  margin-bottom:9px;
+  margin-bottom:10px;
   letter-spacing:1px;
 }
 
 /* Text */
 .text,.doa{
   font-size:14px;
-  line-height:1.6;
+  line-height:1.7;
+  margin-top:10px; /* ✅ prevents text sticking to top */
 }
 
 /* Hashtag */
@@ -178,17 +182,27 @@ h2{
 /* ✅ Mobile optimization */
 @media (max-width:480px){
 
+  /* ✅ Push content DOWN (fix your issue) */
+  .section:first-of-type{
+    padding-top:80px;
+  }
+
   .section{
-    padding:30px 10px;
+    padding:40px 15px;
   }
 
   .glass{
-    margin:10px;
-    padding:20px 15px;
+    margin:12px;
+    padding:25px 15px;
   }
 
   h2{
     font-size:16px;
+  }
+
+  .text,.doa{
+    font-size:13px;
+    margin-top:15px;
   }
 
   .time-box{
